@@ -24,11 +24,6 @@ export default function RootLayout() {
       // Ocultar splash screen ou tomar ação se necessário
     }
   }, [fontsLoaded, fontError]);
-
-  if (!fontsLoaded && !fontError) {
-    return null;
-  }
-
   const colorScheme = useColorScheme();
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState(false);
@@ -88,7 +83,7 @@ export default function RootLayout() {
     }
   }, [session, initialized, hasCompletedOnboarding, segments]);
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded && !fontError) return null;
 
   return (
     <ThemeProvider value={{ ...DarkTheme, colors: { ...DarkTheme.colors, background: '#00000f' } }}>
