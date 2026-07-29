@@ -15,10 +15,20 @@ import { useFonts, Rajdhani_300Light, Rajdhani_400Regular, Rajdhani_500Medium, R
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-  const [fontsLoaded] = useFonts({
+  const [fontsLoaded, fontError] = useFonts({
     Rajdhani_300Light, Rajdhani_400Regular, Rajdhani_500Medium, Rajdhani_600SemiBold, Rajdhani_700Bold
   });
   
+  useEffect(() => {
+    if (fontsLoaded || fontError) {
+      // Ocultar splash screen ou tomar ação se necessário
+    }
+  }, [fontsLoaded, fontError]);
+
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   const colorScheme = useColorScheme();
   const [session, setSession] = useState<Session | null>(null);
   const [initialized, setInitialized] = useState(false);
